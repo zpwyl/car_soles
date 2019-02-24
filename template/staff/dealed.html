@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="icon" href="/static/img/web_icon/favicon.ico" type="image/x-icon" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="/static/css/staff.css">
+</head>
+<body>
+<div id="frame">
+	<div id="left">
+		<div class="person">
+            <p><b>{{ user.belong_to.distributor_name }}</b></p>
+			<img src="/static/img/detail/w.jpg">
+            <p>欢迎您！{{ user.user_type.user_type_name }}{{ user.user_name }}</p>
+		</div>
+
+		<div class="nav">
+			<a href={% url 'staff' %}><li class="li" onmouseover="over(this)" onmouseout="out(this)">所有预约订单</li></a>
+			<a href={% url 'staff' 2 %}><li class="li" onmouseover="over(this)" onmouseout="out(this)">待处理预约订单</li></a>
+			<a href={% url 'staff' 3 %}><li class="li" onmouseover="over(this)" onmouseout="out(this)">已处理预约订单</li></a>
+			<a href={% url 'staff' 4 %}><li class="li" onmouseover="over(this)" onmouseout="out(this)">我的销售</li></a>
+			<a href={% url 'staff' 5 %}><li class="li" onmouseover="over(this)" onmouseout="out(this)">销售记录</li></a>
+		</div>
+	</div>
+	<div id="right">
+		<p>{{ name }}</p>
+		<div class="content">
+			<table>
+				<tr class="first-tr">
+					<th class="th">客户姓名</th>
+					<th class="th">预约车型</th>
+					<th class="th">预约时间</th>
+					<th class="th">客户电话</th>
+					<th class="th">计划买车时间</th>
+					<th class="th">希望得到反馈的时间</th>
+					<th class="choose"></th>
+				</tr>
+                {% for order in orders %}
+				<tr>
+					<th class="th">{{ order.user_name }}{{ order.sex }}</th>
+					<th class="th">{{ order.car_name }}</th>
+					<th class="th">{{ order.order_time }}</th>
+					<th class="th">{{ order.telephone }}</th>
+					<th class="th">{{ order.plan_time }}</th>
+					<th class="th">{{ order.feedback_time }}</th>
+					<th class="choose" style="display: none"><a><div>处理</div></a></th>
+				</tr>
+                {% endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="/static/js/backstage.js"></script>
+</html>

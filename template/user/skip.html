@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>页面跳转</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="/static/js/sweetalert.min.js"> </script>
+<style>
+    p{
+        margin: 0 auto;
+        width: 200px;
+        height: 500px;
+        line-height: 500px;
+    }
+</style>
+</head>
+<body>
+    <script>
+    swal({
+        text: '{{ message }}',
+        type: 'info',
+        showCancelButton: true,
+    }).then(function(isConfirm) {
+        if (isConfirm === true) {
+            var str = "<span style='font-size:18px margin: 0px auto;width: 200px;height: 500px;line-height: 500px;'><p>稍后跳转...</p></span><span style='font-size:24px;'><meta http-equiv='refresh' content='3;URL={{ url }}'></span>";
+            document.body.innerHTML = str;
+        } else {
+        swal('操作错误！！')
+        }
+    });
+    </script>
+</body>
+</html>

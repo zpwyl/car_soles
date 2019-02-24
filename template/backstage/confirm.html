@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>修改密码</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+</head>
+<body>
+<div class="login">
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="forms">
+            <div style="width: 300px;height: 30px;">
+            <p style="color: red">{{ message }}</p>
+            </div>
+            用户名：<input type="text" name="account" value={{ account }}>
+            新密码：<input type="password" name="password" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')">
+        </div>
+        <div class="btn">
+            <div>
+                <input type='submit' value="确认修改">
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

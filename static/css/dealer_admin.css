@@ -1,0 +1,44 @@
+.staff-info{
+    width: 100%;
+}
+.text{
+    float: left;
+    margin-left: 20%;
+    margin-bottom: 50px;
+    width: 260px;
+    height: 40px;
+    border: silver 1px solid;
+
+}
+.submit{
+    float: left;
+    width: 40px;
+    height: 40px;
+}
+
+.first-tr> th{
+    border-top: solid 1px #969696;
+}
+.th{
+    width: 15%;
+    height: 40px;
+    font-weight:300;
+    font-size:16px;
+    border-right: solid 1px #969696;
+    border-bottom: solid 1px #969696;
+}
+.add{
+    position: absolute;
+    right: 20px;
+}
+.order_drive{
+    width: 260px;
+    height: 60px;
+    text-align: center;
+    margin-left: 43%;
+    border:0;
+    vertical-align:middle;
+    line-height:18px;
+    font-size:18px
+}
+

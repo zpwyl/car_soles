@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="icon" href="/static/img/web_icon/favicon.ico" type="image/x-icon" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="/static/css/staff.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/dealer_admin.css">
+</head>
+<body>
+<div id="frame">
+	<div id="left">
+		<div class="person">
+			<img src="/static/img/detail/w.jpg">
+            <p style="font-size: 20px;padding-bottom: 20px;">{{ user.user_type.user_type_name }}</p>
+            <p style="font-size: 20px;">{{ user.belong_to.distributor_name }}</p>
+		</div>
+
+		<div class="nav">
+			<a href={% url 'dealer_admin' %}><li class="li" onmouseover="over(this)" onmouseout="out(this)">员工管理</li></a>
+			<a href={% url 'dealer_admin' 2 %}><li class="li" onmouseover="over(this)" onmouseout="out(this)">车辆库存管理</li></a>
+			<a href={% url 'dealer_admin' 3 %}><li class="li" onmouseover="over(this)" onmouseout="out(this)">查询预约记录</li></a>
+			<a href={% url 'dealer_admin' 4 %}><li class="li" onmouseover="over(this)" onmouseout="out(this)">查询购买记录</li></a>
+		</div>
+	</div>
+	<div id="right">
+        <p>{{ name }}</p>
+
+		<div class="content">
+            <form class="select-form" action="" method="POST" enctype="multipart/form-data">
+                <input class="text" type="text" name="name" value="请输入姓名或员工工号"><input type="submit" class='submit' value="搜索">
+            </form>
+            <div style="clear: both"></div>
+            {% if orders %}
+            <table>
+				<tr class="first-tr">
+					<th class="th">客户姓名</th>
+					<th class="th">预约车型</th>
+					<th class="th">预约时间</th>
+					<th class="th">客户电话</th>
+					<th class="th">处理员工</th>
+					<th class="th">计划买车时间</th>
+				</tr>
+                {% for order in orders %}
+				<tr>
+					<th class="th">{{ order.user_name }}{{ order.sex }}</th>
+					<th class="th">{{ order.car_name }}</th>
+					<th class="th">{{ order.order_time }}</th>
+					<th class="th">{{ order.telephone }}</th>
+					<th class="th">{{ order.staff_id.user_name }}</th>
+					<th class="th">{{ order.plan_time }}</th>
+					</tr>
+                {% endfor %}
+			</table>
+            {% else %}
+            <p style="width: 100%;line-height: 40px;height: 40px;text-align: center">没有查询结果</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="/static/js/backstage.js"></script>
+</html>

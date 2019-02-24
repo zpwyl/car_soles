@@ -1,0 +1,94 @@
+
+.subnav{
+	position: relative;
+	width: 100%;
+}
+/*.subnav > div{
+	position: relative;
+}*/
+.subnav_fixed{
+	position: fixed;
+	background-color: white;
+	width: 100%;
+	height: 60px;
+	z-index: 2;
+}
+.subnav_fixed> h3{
+	position: absolute;
+	left: 100px;
+	height: 60px;
+	line-height: 60px;
+	font-weight: 400;
+}
+.subnav_fixed >div{
+	position: absolute;
+	right: 10%;
+}
+.subnav_fixed div>ul>li{
+	height: 60px;
+	line-height: 60px;
+	width: 100px;
+	display: block;
+	float: left;
+	text-align: center;
+}
+.subnav_fixed div>ul>li:hover{
+	color: black;
+}
+/*.subnav  > div>div>ul>li:last-child{*/
+	/*width: 200px;*/
+/*}*/
+.detail_img{
+	position: relative;
+}
+.detail_img>img{
+	position: relative;
+	width: 1349px;
+}
+.detail_img>div{
+	position: absolute;
+	left: 200px;
+	top: 200px;
+	z-index: 1;
+}
+.detail_img>div>h3,.detail_img>div>p{
+	color: white;
+	font-size: 30px;
+	margin-left: 30px;
+	font-weight: 400;
+}
+.detail_img>div>p{
+	font-size: 20px;
+}
+.move{
+	position: relative;
+	padding: 80px 0;
+}
+.move > h3 ,.move >div h3{
+	position: relative;
+	text-align: center;
+	margin-top: 60px;
+	padding-bottom: 50px;
+	font-size: 30px;
+	font-weight: 400;
+}
+.move>img{
+	width: 1349px;
+}
+.move > p{
+	position: relative;
+	padding-bottom: 80px;
+	text-align: center;
+	width: 80%;
+	left: 10%;
+}
+.move >div{
+	width: 45%;
+	margin-left: 8%;
+}
+.move> a > img{
+	position: absolute;
+	right: 5%;
+	top: 150px;
+	width: 40%;
+}

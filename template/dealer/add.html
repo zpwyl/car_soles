@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="icon" href="/static/img/web_icon/favicon.ico" type="image/x-icon" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="/static/css/staff.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/dealer_admin.css">
+</head>
+<body>
+<div id="frame">
+	<div id="left">
+		<div class="person">
+			<img src="/static/img/detail/w.jpg">
+            <p style="font-size: 20px;padding-bottom: 20px;">{{ user.user_type.user_type_name }}</p>
+            <p style="font-size: 20px;">{{ user.belong_to.distributor_name }}</p>
+		</div>
+
+		<div class="nav">
+			<a href={% url 'dealer_admin' %}><li class="li" onmouseover="over(this)" onmouseout="out(this)">员工管理</li></a>
+			<a href={% url 'dealer_admin' 2 %}><li class="li" onmouseover="over(this)" onmouseout="out(this)">车辆库存管理</li></a>
+			<a href={% url 'dealer_admin' 3 %}><li class="li" onmouseover="over(this)" onmouseout="out(this)">查询预约记录</li></a>
+			<a href={% url 'dealer_admin' 4 %}><li class="li" onmouseover="over(this)" onmouseout="out(this)">查询购买记录</li></a>
+		</div>
+	</div>
+	<div id="right">
+		<p>{{ name }}</p>
+		<div>
+            <form class="info_form" action="" method="POST" enctype="multipart/form-data">
+                {% if display %}
+                <label>工号：</label><input type="text" name="account" readonly="readonly" value="{{ staff.account }}"><br>
+                {% else %}
+                <label>工号：</label><input type="text" name="account" value="{{ staff.account }}"><br>
+                {% endif %}
+                <label>姓名：</label><input type="text" name="name" value="{{ staff.user_name }}"><br>
+                <label>性别：</label><div>
+                {% ifequal staff.sex 1 %}
+                <input type="radio" name="sex" value=1 checked="ture">先生<input type="radio" name="sex" id="female" value=2>女士
+                {% else %}
+                <input type="radio" name="sex" value=1>先生<input type="radio" name="sex" id="female" value=2 checked="ture">女士
+                {% endifequal %}
+                </div><br>
+                <label>电话：</label><input type="text" name="tel" value={{ staff.telephone }}><br>
+                <label>邮箱：</label><input type="text" name="email" value={{ staff.email }}><br>
+                <label>地址：</label><input type="text" name="address" value={{ staff.address }}><br><br>
+                {% if display %}
+                <input type="submit" value="修改" class="order_drive">
+                {% else %}
+                <input type="submit" value="添加" class="order_drive">
+                {% endif %}
+            </form>
+        </div>
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="/static/js/backstage.js"></script>
+</html>

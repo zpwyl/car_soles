@@ -1,0 +1,142 @@
+*{
+    margin: 0;
+    padding: 0
+}
+a{
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+}
+#frame{
+    width: 100%;
+}
+#left{
+    position: absolute;
+    left: 0;
+    width: 15%;
+    height: 100%;
+    border-right: solid 1px #f2f2f2;
+}
+.nav{
+    width: 100%;
+    margin-top: 30px;
+}
+.nav>a>li{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    display: block;
+    transition: all .3s ease;
+}
+.nav>a>li:hover{
+    background: red;
+}
+.red{
+    background: red;
+}
+#right{
+    position: absolute;
+    right: 0;
+    width: 85%;
+    height: 100%;
+}
+#right > p{
+    height: 40px;
+    line-height: 40px;
+    margin-left: 20px;
+    padding-left: 20px;
+    border-left: solid 2px red;
+}
+.content{
+    width: 100%;
+    height: 95%;
+    padding: 20px 0;
+}
+.content>form{
+    width: 100%;
+    height: 40px;
+}
+.content>form>p{
+    float: left;
+    height: 40px;
+    width: 200px;
+    line-height: 40px;
+    margin-left: 50px;
+}
+.num{
+    width: 260px;
+    height: 30px;
+}
+.queinput{
+    width: 34px;
+    height: 30px;
+}
+.first-tr> th{
+    border-top: solid 1px #969696;
+}
+.th{
+    width: 16.1%;
+    height: 40px;
+    font-weight:300;
+    font-size:16px;
+    border-right: solid 1px #969696;
+    border-bottom: solid 1px #969696;
+}
+.choose{
+    display: inline-block;
+    text-align: center;
+    font-weight:300;
+    font-size:18px;
+}
+.choose>a>div{
+    background: red;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 3px;
+}
+.info_form{
+    display: inline-block;
+}
+.info_form > label{
+    display:inline-block;
+    margin-top:20px;
+    text-align:right;
+    width: 200px;
+}
+.info_form > input,.info_form > select{
+    width: 260px;
+    height: 34px;
+}
+.info_form > div{
+    display:inline-block;
+    width: 260px;
+    text-align: left;
+}
+.buy_car{
+    width: 260px;
+    height: 60px;
+    text-align: center;
+    margin-left: 60%;
+    margin-top: 30px;
+    border:0;
+    vertical-align:middle;
+    line-height:18px;
+    font-size:14px
+}
+.person{
+    width: 100%;
+    display: inline-block;
+    background: white;
+    text-align: center;
+}
+.person > p{
+    padding-bottom: 20px;
+}
+.person > img{
+    display: inline-block;
+    border-radius:50%;
+    width: 40px;
+    height: 40px;
+}

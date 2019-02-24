@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="icon" href="/static/img/web_icon/favicon.ico" type="image/x-icon" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="/static/css/staff.css">
+</head>
+<body>
+<div id="frame">
+	<div id="left">
+		<div class="person">
+            <p><b>{{ user.belong_to.distributor_name }}</b></p>
+			<img src="/static/img/detail/w.jpg" style="display: inline-block;border-radius:50%;width: 40px;height: 40px;">
+            <p>欢迎您！{{ user.user_type.user_type_name }}{{ user.user_name }}</p>
+		</div>
+
+		<div class="nav">
+			<a href={% url 'staff' %}><li class="li" onmouseover="over(this)" onmouseout="out(this)">所有预约订单</li></a>
+			<a href={% url 'staff' 2 %}><li class="li" onmouseover="over(this)" onmouseout="out(this)">待处理预约订单</li></a>
+			<a href={% url 'staff' 3 %}><li class="li" onmouseover="over(this)" onmouseout="out(this)">已处理预约订单</li></a>
+			<a href={% url 'staff' 4 %}><li class="li" onmouseover="over(this)" onmouseout="out(this)">我的销售</li></a>
+			<a href={% url 'staff' 5 %}><li class="li" onmouseover="over(this)" onmouseout="out(this)">销售记录</li></a>
+		</div>
+	</div>
+	<div id="right">
+		<p>{{ name }}</p>
+		<div class="content">
+			<form class="info_form" action="/backstage/online_buy/" method="post" enctype="multipart/form-data">
+                <label style="color:red;margin-left: 15%">{{ message }}</label><br>
+                <label>客户姓名</label><input type="text" name="name">
+                <label>购买车型</label>
+                    <select id="province" name ="car_type">
+                        <option value ="">请选车型</option>
+                        {% for i in car_type %}
+                        <option value ={{ i.car_id }}>{{ i.car_name }}</option>
+                        {% endfor %}
+                    </select><br>
+                <label>客户性别</label><div><input type="radio" name="sex" id="male" value="先生">先生<input type="radio" name="sex" id="female" value="女士">女士</div>
+                <label>电话号码</label><input type="text" name="telephone"><br>
+                <label>办理地址</label><input type="text" readonly="readonly" name="address" value={{ user.belong_to.distributor_name }}>
+                <label>客户月薪</label><input type="text" name="month_salary"><br>
+                <label>身份证号码</label><input type="text" name="id_card">
+                <label>银行卡号</label><input type="text" name="bank_card"><br>
+                <label>首付</label><input type="text" name="first_pay">
+                <label>月供</label><input type="text" name="month_pay"><br>
+                <input type="submit" value="提交购买订单" class="buy_car">
+            </form>
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="/static/js/backstage.js"></script>
+</html>

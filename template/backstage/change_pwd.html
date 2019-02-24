@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+</head>
+<body>
+<div class="login">
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="forms">
+            <div style="width: 300px;height: 30px;">
+            <p style="color: red">{{ message }}</p>
+            </div>
+            用户名：<input type="text" name="account" onkeyup="value=value.replace(/[^0-9]/g,'')">
+            原始密码：<input type="password" name="password" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')">
+            再次输入密码：<input  type="password" name="again_password" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')">
+        </div>
+        <div class="btn">
+            <div>
+                <a href="#">返回登录</a>
+                <input type='submit' value="修改">
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

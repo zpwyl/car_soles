@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>车型配置</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="icon" href="/static/img/web_icon/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="/static/css/comment.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/spec.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/nav_detail.css">
+</head>
+<body>
+	<div id='frame'>
+		<div id="header">
+			<div id="logo">
+				<a href="http://127.0.0.1:8000"><img src="/static/img/web_icon/logo.jpg"></a>
+			</div>
+			<div id="main_nav">
+				<ul>
+                    <li onmouseover="showMeum(this)" onmouseout="hideMeum(this)">
+                        <div class="detail">
+                            <div class="detail_left">
+                                <dl>
+                                    <dt><a><b>{{ car_types.main_nav_name }}</b></a></dt>
+                                    {% for car_type_detail in car_type_details %}
+                                        <dd><a href={% url 'overview' %}#{{ car_type_detail.car_system_id }}>{{ car_type_detail.car_system_name }}</a></dd>
+                                    {% endfor %}
+                                </dl>
+                            </div>
+                            <div class="detail_right">
+                                <a href={% url 'overview' %}><img src="/static/img/detail/q.jpg"><span>车型筛选</span></a>
+                                <a href={% url 'financial_service' %}><img src="/static/img/detail/y.jpg"><span>金融服务</span></a>
+                            </div>
+                        </div>
+                        <a href={% url 'overview'  %}>{{ car_types.main_nav_name }}</a>
+                    </li>
+					<li onmouseover="showMeum(this)" onmouseout="hideMeum(this)">
+						<div class="detail">
+							<div class="detail_left">
+								<dl>
+									<dt><a><b>{{ car_brands.main_nav_name }}</b></a></dt>
+                                    <dd onmouseover="showDetail(this)" onmouseout="hideDetail(this)">
+                                        <a href="/brand/{{ car_brand_details_first.main_one_nav_title }}">{{ car_brand_details_first.main_one_nav_name }}</a>
+                                        <div class="left_detail_right_show">
+                                            <h3>{{ car_brand_details_first.main_one_nav_name }}</h3>
+                                            <p>{{ car_brand_details_first.main_one_nav_brief }}</p>
+                                            <a><img src="/media/{{ car_brand_details_first.main_one_nav_img }}"></a>
+                                        </div>
+                                    </dd>
+                                    {% for car_brand_detail in car_brand_details%}
+                                        <dd onmouseover="showDetail(this)" onmouseout="hideDetail(this)">
+                                            <a href="/brand/{{ car_brand_detail.main_one_nav_title }}">{{ car_brand_detail.main_one_nav_name }}</a>
+                                            <div class="left_detail_right">
+                                                <h3>{{ car_brand_detail.main_one_nav_name }}</h3>
+                                                <p>{{ car_brand_detail.main_one_nav_brief }}</p>
+                                                <a><img src="/media/{{ car_brand_detail.main_one_nav_img }}"></a>
+                                            </div>
+                                        </dd>
+									{% endfor %}
+								</dl>
+							</div>
+						</div>
+						<a href={% url 'brand' %}>{{ car_brands.main_nav_name }}</a>
+					</li>
+					<li onmouseover="showMeum(this)" onmouseout="hideMeum(this)">
+						<div class="detail">
+							<div class="detail_left">
+								<dl>
+									<dt><a><b>{{ customer_services.main_nav_name }}</b></a></dt>
+									<dd onmouseover="showDetail(this)" onmouseout="hideDetail(this)">
+										<a href="/service/{{ customer_service_detail_first.main_one_nav_title }}/">{{ customer_service_detail_first.main_one_nav_name }}</a>
+										<div class="left_detail_right_show">
+											<h3>{{ customer_service_detail_first.main_one_nav_name }}</h3>
+											<p>{{ customer_service_detail_first.main_one_nav_brief }}</p>
+											<a><img src="/media/{{ customer_service_detail_first.main_one_nav_img }}"></a>
+										</div>
+									</dd>
+                                    {% for customer_service_detail in customer_service_details %}
+                                        <dd onmouseover="showDetail(this)" onmouseout="hideDetail(this)">
+                                            <a href="/service/{{ customer_service_detail.main_one_nav_title }}/">{{ customer_service_detail.main_one_nav_name }}</a>
+                                            <div class="left_detail_right">
+                                                <h3>{{ customer_service_detail.main_one_nav_name }}</h3>
+                                                <p>{{ customer_service_detail.main_one_nav_brief }}</p>
+                                                <a><img src="/media/{{ customer_service_detail.main_one_nav_img }}"></a>
+                                            </div>
+                                        </dd>
+                                    {% endfor %}
+								</dl>
+							</div>
+						</div>
+						<a href={% url 'service' %}>{{ customer_services.main_nav_name }}</a>
+					</li>
+					<li onmouseover="showMeum(this)" onmouseout="hideMeum(this)">
+						<div class="detail">
+							<div class="detail_left">
+								<dl>
+									<dt><a><b>{{ news_informations.main_nav_name }}</b></a></dt>
+                                    {% for news_information_detail in news_information_details %}
+									<dd onmouseover="showDetail(this)" onmouseout="hideDetail(this)">
+										<a>{{ news_information_detail.main_one_nav_name }}</a>
+										<div class="left_detail_right_show">
+											<h3>{{ news_information_detail.main_one_nav_name }}</h3>
+											<p>{{ news_information_detail.main_one_nav_brief }}</p>
+											<a><img src="/media/{{ news_information_detail.main_one_nav_img }}"></a>
+										</div>
+									</dd>
+                                    {% endfor %}
+								</dl>
+							</div>
+						</div>
+						<a href={% url 'news' %}>{{ news_informations.main_nav_name }}</a>
+					</li>
+					<li><a href={% url 'dealer' %}>{{ inquire_dealers.main_nav_name }}</a></li>
+					<li><a href={% url 'test_drive' %}>{{ test_drives.main_nav_name }}</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="main">
+            <div class="subnav_fixed">
+                <h3>{{ car_type }}</h3>
+                <div>
+                    <ul>
+                        {% for function in function_name %}
+                        <li><a href="/models/{{ car_type }}/{{ function.herf }}">{{ function.car_type_base_name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+            <div class="div_table">
+				<table style='border-collapse:collapse;' >
+					<tr style="background: #f2f2f2">
+					    <th class="info_name info_name_top">车型</th>
+                        {% for car_info in car_infos %}
+					    <th  class="data length">{{ car_info.car_name }}</th>
+                        {% endfor %}
+				  	</tr>
+				  	<tr>
+					    <th class="info_name">厂家建议零售价</th>
+					    {% for car_info in car_infos %}
+					    <th  class="data">{{ car_info.car_price }}</th>
+                        {% endfor %}
+				  	</tr>
+				</table>
+                {% if car_detail_one %}
+				<div class='car_info_name'><lable>{{ car_detail_one.name }}</lable><span class="add">-</span></div>
+				<table style="display: none">
+                    {% for car_detail_one_de in car_detail_one_des %}
+					<tr>
+				  		<th class="info_name">{{ car_detail_one_de.car_detail_info_name }}</th>
+				  		<th class="comment_data">{{ car_detail_one_de.car_detail_info }}</th>
+				  	</tr>
+                    {% endfor %}
+				</table>
+                {% endif %}
+                {% if car_detail_two %}
+                <div class='car_info_name'><lable>{{ car_detail_two.name }}</lable><span class="add">+</span></div>
+				<table style="display: none">
+                    {% for car_detail_two_de in car_detail_two_des %}
+					<tr>
+				  		<th class="info_name">{{ car_detail_two_de.car_detail_info_name }}</th>
+				  		<th class="comment_data">{{ car_detail_two_de.car_detail_info }}</th>
+				  	</tr>
+                    {% endfor %}
+				</table>
+                {% endif %}
+                {% if car_detail_three %}
+                <div class='car_info_name'><lable>{{ car_detail_three.name }}</lable><span class="add">+</span></div>
+				<table style="display: none">
+                    {% for car_detail_three_de in car_detail_three_des %}
+					<tr>
+				  		<th class="info_name">{{ car_detail_three_de.car_detail_info_name }}</th>
+				  		<th class="comment_data">{{ car_detail_three_de.car_detail_info }}</th>
+				  	</tr>
+                    {% endfor %}
+				</table>
+                {% endif %}
+                {% if car_detail_four %}
+                    <div class='car_info_name'><lable>{{ car_detail_four.name }}</lable><span class="add">+</span></div>
+                    <table style="display: none">
+                        {% for car_detail_four_de in car_detail_four_des %}
+                        <tr>
+                            <th class="info_name">{{ car_detail_four_de.car_detail_info_name }}</th>
+                            <th class="comment_data">{{ car_detail_four_de.car_detail_info }}</th>
+                        </tr>
+                        {% endfor %}
+				</table>
+                {% endif %}
+                {% if car_detail_five %}
+                <div class='car_info_name'><lable>{{ car_detail_five.name }}</lable><span class="add">+</span></div>
+				<table style="display: none">
+                    {% for car_detail_five_de in car_detail_five_des %}
+					<tr>
+				  		<th class="info_name">{{ car_detail_five_de.car_detail_info_name }}</th>
+				  		<th class="comment_data">{{ car_detail_five_de.car_detail_info }}</th>
+				  	</tr>
+                    {% endfor %}
+				</table>
+                {% endif %}
+
+				<div class='car_info_name'><lable>{{ appearance_name }}</lable><span class="add">+</span></div>
+				<table style="display: none">
+                    {% for i in appearance %}
+                        <tr>
+                            <th class="info_name">{{ i.name }}</th>
+                            {% for j in i.data %}
+                                <th class="data">
+                                    {% ifequal j '1' %}
+                                        <span class='ball'></span>
+                                    {% endifequal %}
+                                    {% ifequal j '0' %}
+                                        <span class='line'></span>
+                                    {% endifequal %}
+                                </th>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+				</table>
+                <div class='car_info_name'><lable>{{ inner_chamber_name }}</lable><span class="add">+</span></div>
+				<table style="display: none">
+                    {% for i in inner_chamber %}
+                        <tr>
+                            <th class="info_name">{{ i.name }}</th>
+                            {% for j in i.data %}
+                                <th class="data">
+                                    {% ifequal j '1' %}
+                                        <span class='ball'></span>
+                                    {% endifequal %}
+                                    {% ifequal j '0' %}
+                                        <span class='line'></span>
+                                    {% endifequal %}
+                                </th>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+				</table>
+                <div class='car_info_name'><lable>{{ equipment_name }}</lable><span class="add">+</span></div>
+				<table style="display: none">
+                    {% for i in equipment %}
+                        <tr>
+                            <th class="info_name">{{ i.name }}</th>
+                            {% for j in i.data %}
+                                <th class="data">
+                                    {% ifequal j '1' %}
+                                        <span class='ball'></span>
+                                    {% endifequal %}
+                                    {% ifequal j '0' %}
+                                        <span class='line'></span>
+                                    {% endifequal %}
+                                </th>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+				</table>
+                <div class='car_info_name'><lable>{{ safety_system_name }}</lable><span class="add">+</span></div>
+				<table style="display: none">
+                    {% for i in safety_system %}
+                        <tr>
+                            <th class="info_name">{{ i.name }}</th>
+                            {% for j in i.data %}
+                                <th class="data">
+                                    {% ifequal j '1' %}
+                                        <span class='ball'></span>
+                                    {% endifequal %}
+                                    {% ifequal j '0' %}
+                                        <span class='line'></span>
+                                    {% endifequal %}
+                                </th>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+				</table>
+
+
+
+			</div>
+            <div class="note">
+                <p>*注释:</p>
+                <p>&nbsp;&nbsp;双 VVT-i —包括控制进气过程的 VVT-i 系统和控制排气过程的 VVT-i 系统 </p>
+                <p>&nbsp;&nbsp;LSD — 防滑差速器</p>
+                <p>&nbsp;&nbsp;LED — 发光二极管</p>
+                <p>&nbsp;&nbsp;SRS — 辅助约束系统</p>
+                <p>&nbsp;&nbsp;ELR — 紧急锁定装置</p>
+                <p>&nbsp;&nbsp;**从后备箱地台到座椅靠背上沿为高度，计算后备箱容积。</p>
+                <p>&nbsp;&nbsp;***仅指座椅与乘客人体接触的主要部分的材料。</p>
+                <p>&nbsp;&nbsp;<span class="ball"></span>&nbsp;标准配置</p>
+                <p>&nbsp;&nbsp;<span class="line"></span>&nbsp;无此配置</p>
+            </div>
+
+
+		</div>
+
+
+
+		<div id="nav">
+            <div>
+                <div>
+                    <dl>
+                        <dt><a><b>{{ car_types.main_nav_name }}</b></a></dt>
+                       {% for car_type_detail in car_type_details %}
+                           <dd><a href={% url 'overview' %}#{{ car_type_detail.car_system_id }}>{{ car_type_detail.car_system_name}}</a></dd>
+                       {% endfor %}
+                    </dl>
+                </div>
+                <div>
+                    <dl>
+                        <dt><a><b>{{ car_brands.main_nav_name }}</b></a></dt>
+                        <dd><a href="/brand/{{ car_brand_details_first.main_one_nav_title }}/">{{ car_brand_details_first.main_one_nav_name }}</a></dd>
+                        {% for car_brand_detail in car_brand_details %}
+                        <dd><a href="/brand/{{ car_brand_detail.main_one_nav_title }}/">{{ car_brand_detail.main_one_nav_name }}</a></dd>
+                        {% endfor %}
+                    </dl>
+                </div>
+                <div>
+                    <dl>
+                        <dt><a><b>{{ news_informations.main_nav_name }}</b></a></dt>
+                        <dd><a href={% url 'news' %}>{{ news_informations.main_nav_name }}</a></dd>
+                    </dl>
+                </div>
+                <div>
+                    <dl>
+                        <dt><a><b>{{ test_drives.main_nav_name }}</b></a></dt>
+                        <dd><a href={% url 'test_drive' %}>{{ test_drives.main_nav_name }}</a></dd>
+                    </dl>
+                </div>
+                <div>
+                    <dl>
+                        <dt><a><b>{{ customer_services.main_nav_name }}</b></a></dt>
+                        <dd><a href='/service/{{ customer_service_detail_first.main_one_nav_title }}'>{{ customer_service_detail_first.main_one_nav_name }}</a></dd>
+                        {% for customer_service_detail in customer_service_details %}
+                        <dd><a href="/service/{{ customer_service_detail.main_one_nav_title }}">{{ customer_service_detail.main_one_nav_name }}</a></dd>
+                        {% endfor %}
+                    </dl>
+                </div>
+                <div>
+                    <dl>
+                        <dt><b>购车指南</b></dt>
+                        <dd><a href={% url 'dealer' %}>查找经销商</a></dd>
+                        <dd><a href={% url 'financial_service' %}>金融计算器</a></dd>
+                    </dl>
+                </div>
+            </div>
+		</div>
+		<div style="clear: both;"></div>
+		<div id="footer">
+			<div class="footer-link">
+				<ul>
+					<li><a href="./">网站首页</a></li>
+					<li><a href="#">法律声明</a></li>
+					<li><a href="#">联系我们</a></li>
+					<li><a href="#">经销商招募</a></li>
+					<li><a href={% url 'financial_service' %}>金融服务</a></li>
+					<li><a href="#">预约试驾</a></li>
+					<li><a href="#">官方微博</a></li>
+					<li><a href="#">官方微信</a></li>
+				</ul>
+			</div>
+			<div class="copyright">
+				<p class='text-center'>© 2005-2018 XXXX版权所有<span></span>XX汽车投资有限公司</p>
+				<p class='text-center'>京ICP备XXXXXXXX号<span></span>京公网安备XXXXXXXXXXXXX</p>
+			</div>
+
+		</div>
+	</div>
+	<script type="text/javascript" src="/static/js/spec.js"></script>
+	<script type="text/javascript" src="/static/js/nav_detail.js"></script>
+	<script type="text/javascript" src="/static/js/comment.js"></script>
+</body>
+</html>
