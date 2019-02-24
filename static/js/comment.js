@@ -44,7 +44,7 @@ window.onload = function(){
     }
     try{
         var subnav_fixed = document.getElementsByClassName('subnav_fixed')[0];
-        console.log(window.pageYOffset);
+        // console.log(window.pageYOffset);
         if(window.pageYOffset === 0){
             subnav_fixed.style.marginTop =  '0px';
         }else{

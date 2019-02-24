@@ -104,7 +104,6 @@ function car_sys(e){
 }
 
 
-
 var arr_sheng;
 var arr_shi;
 var arr_xian;
@@ -157,7 +156,7 @@ if(osheng){
         var arr_xian_next=quanju_arr[index];
         input_arr(arr_xian_next,oxian);//调用,给县下拉栏添元素
         var num = parseInt(oshi.value)+ 1;
-        var city = e.srcElement[num].innerText;
+        var city = e.srcElement[num].innerText + '市';
         get_province(city);
     };
 
@@ -181,55 +180,58 @@ try{
         var company = e.srcElement[num].innerText;
         get_point(company);
     };
-
-
-    function get_province(space) {
-        myGeo.getPoint(space, function(point) {
-            if (point) {
-                map.centerAndZoom(point, 13);
-                map.addOverlay(new BMap.Marker(point));
-            }
-        })}
-
-    function get_point(space){
-        var address;
-        var telephone;
-        console.log(1);
-        $.ajax({
-            url: origin.api_home+'/info_dealer/'+space+'/',
-            type:"get",
-            data: {},
-            datatype:'json',
-            error: function () {
-                console.log("error")
-            },
-            success: function (data) {
-                // console.log(data);
-                address = data.address;
-                telephone = data.telephone;
-            }
-        });
-        myGeo.getPoint(space, function(point){
-        if (point) {
-            map.centerAndZoom(point, 16);
-            map.addOverlay(new BMap.Marker(point));
-            var opts = {
-                width : 300,     // 信息窗口宽度
-                height: 200,     // 信息窗口高度
-                title : space, // 信息窗口标题
-            };
-            var infoWindow = new BMap.InfoWindow("<p style='margin:20px 0'>电话："+ telephone+"</p> \
-                <p>"+address+"</p> \
-                </br> \
-                <input type='text'> <a href='http://map.baidu.com'>出发</a> <a href='/test_drive/'>预约试驾</a>", opts);  // 创建信息窗口对象
-            map.openInfoWindow(infoWindow, map.getCenter());      // 打开信息窗口
-        }
-     });
-    }
 }catch (err) {
     console.log(err);
 }
 
+function get_province(space) {
+    myGeo.getPoint(space, function(point) {
+        if (point) {
+            // console.log(space);
+            map.centerAndZoom(point, 10);
+            map.addOverlay(new BMap.Marker(point));
+        }
+    })}
+
+function get_point(space){
+    $.ajax({
+        url: origin.api_home+'/info_dealer/'+space+'/',
+        type:"get",
+        data: {},
+        datatype:'json',
+        error: function () {
+            console.log("error")
+        },
+        success: function (data) {
+            myGeo.getPoint(space, function(point){
+                if (point) {
+                    map.centerAndZoom(point, 20);
+                    map.addOverlay(new BMap.Marker(point));
+                    var opts = {
+                        width : 300,     // 信息窗口宽度
+                        height: 200,     // 信息窗口高度
+                        title : space, // 信息窗口标题
+                    };
+
+                    var infoWindow = new BMap.InfoWindow("<p style='margin:20px 0'>电话："+ data.telephone+"</p> \
+                        <p>"+data.address+"</p> \
+                        </br> \
+                        <input type='text'> <a href='http://map.baidu.com'>出发</a> <a href='/test_drive/'>预约试驾</a>", opts);  // 创建信息窗口对象
+                    map.openInfoWindow(infoWindow, map.getCenter());      // 打开信息窗口
+                }
+                else{
+                    var opts = {
+                        width : 300,     // 信息窗口宽度
+                        height: 200,     // 信息窗口高度
+                    };
+
+                    var infoWindow = new BMap.InfoWindow("<p style='line-height: 200px;text-align: center'>暂无信息</p>", opts);  // 创建信息窗口对象
+                    map.openInfoWindow(infoWindow, map.getCenter());      // 打开信息窗口
+                }
+            });
+        }
+    });
+}
 
 var tel_error = document.getElementById('tel_error');
 // 鼠标进入input框value变化
