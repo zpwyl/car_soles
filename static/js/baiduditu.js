@@ -38,9 +38,6 @@ function car(e) {
     }catch (e) {
 
     }
-
-    // console.log(interest_rate.innerHTML);
-    // console.log(typeof(interest_rate.innerHTML));
     function change_product(n, m) {
         if(parseInt(time.value)===n){
             first_payments.innerHTML = all_price * parseInt(percentage.value) * 0.01;
@@ -96,7 +93,6 @@ function car_sys(e){
                  var str = "<li onclick='car(this)'><a><div class='car'><p>"+data[i][0]+"</p><p>"+data[i][1]+"</p></div></a></li>";
                  Heml += str
             }
-            // console.log(Heml);
             type_car.innerHTML = Heml;
         }
     });
@@ -120,7 +116,6 @@ if(osheng){
             console.log("error")
         },
         success: function (data) {
-            // console.log(data);
             window.data = data;
             arr_sheng = data.province;
             arr_shi = data.city;
@@ -187,7 +182,6 @@ try{
 function get_province(space) {
     myGeo.getPoint(space, function(point) {
         if (point) {
-            // console.log(space);
             map.centerAndZoom(point, 10);
             map.addOverlay(new BMap.Marker(point));
         }
@@ -242,16 +236,13 @@ function fouse(e) {
     }
 }
 function blue(e) {
-    console.log(e.value);
     if(e.value === ''){
-        console.log(2);
         if(e.name === 'name'){
             e.value = '请输入姓名'
         }else{
         e.value = '请输入电话号码'
         }
     }else{
-        console.log(1);
         if(e.name === 'telephone'){
             if(e.value.length !== 11){
                 e.value = '请输入电话号码';

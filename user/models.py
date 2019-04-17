@@ -182,6 +182,7 @@ class SlideshowWrapper(models.Model):
     title = models.CharField(max_length=30, blank=True)
     content = models.CharField(max_length=255, blank=True)
     src = models.ImageField(upload_to='rotation_chart/', blank=True)
+    href = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
         return "<{}>({})".format(self.slideshow_wrapper_id, self.title)

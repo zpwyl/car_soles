@@ -26,7 +26,3 @@ class BuyForm(forms.Form):
     bank_card = forms.CharField(label='银行卡号', max_length=20)
     first_pay = forms.CharField(label='首付', max_length=20)
     month_pay = forms.CharField(label='月供', max_length=20)
-
-
-
-

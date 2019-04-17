@@ -120,7 +120,7 @@
                     <div id="left" class="chooseBut"></div>
                     <div id="right" class="chooseBut"></div>
                     {% for slideshow_wrapper in slideshow_wrappers %}
-                        <a href="#" title="" index="{{ slideshow_wrapper.slideshow_wrapper_id }}">
+                        <a href={{ slideshow_wrapper.href }} title="" index="{{ slideshow_wrapper.slideshow_wrapper_id }}">
                             <div class="banner_title">
                                 <h3>{{ slideshow_wrapper.title }}</h3>
                                 <p>{{ slideshow_wrapper.content }}</p>
@@ -190,7 +190,7 @@
 				</div>
 
 				<div class="function">
-					<a href="#">
+					<a href='/brand/eco_thinking/'>
 						<div>
 							<h3>环保理念</h3>
 							<p>大胆创想与领先科技造就的精美绝伦</p>
@@ -201,7 +201,7 @@
 				</div>
 			</div>
 			<div style="clear: both;"></div>
-			
+
 		</div>
 		<div id="nav">
             <div>
@@ -270,7 +270,7 @@
 				<p class='text-center'>© 2005-2018 XXXX版权所有<span></span>XX汽车投资有限公司</p>
 				<p class='text-center'>京ICP备XXXXXXXX号<span></span>京公网安备XXXXXXXXXXXXX</p>
 			</div>
-			
+
 		</div>
 	</div>
 	<script type="text/javascript" src="/static/js/rotation_chart.js"></script>

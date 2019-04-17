@@ -62,5 +62,3 @@ urlpatterns = [
     path('backstage/inventoryupdate/<int:inventory_id>/', views.inventoryupdate, name='inventoryupdate'),
 
 ]
-
-

@@ -1,28 +1,19 @@
 body {
     margin: 0 ;
+    padding: 0 ;
     overflow: hidden; /* 溢出隐藏 */
 }
-a {
-    cursor: pointer;
-	text-decoration: none;
-    color: black;
+#contorl{
+    position: absolute;
+    width: 15%;
+    height: 20%;
+    right: 20px;
+    top: 20px;
+    background-color: white;
 }
-#loading {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    color: #FFFFFF;
-    font-size: 20px;
-    margin-top: -30px;
-    margin-left: -40px;
+.color{
+    border: none;
+    outline: none;
 }
-#color > li{
-    display: block;
-    margin-top: 20px;
-    width: 100px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    border: lightgray solid 1px;
-
-}
+::-webkit-color-swatch-wrapper{background-color:#ffffff;}
+::-webkit-color-swatch{position: relative;}
