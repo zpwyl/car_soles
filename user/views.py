@@ -618,49 +618,52 @@ def staff(request, num=None):
     try:
         account = request.session['account']
         user = User.objects.get(account=account)
-        user_agent = {
-            'user': user,
-        }
-        if num == None:
-            order = OrderDrive.objects.filter(dealer=user.belong_to.distributor_name, staff_id=None)
-            add = {
-                'name': '所有订单',
-                'orders': order
+        if user.user_type.user_type == 1:
+            user_agent = {
+                'user': user,
             }
-            content = dict(user_agent, **add)
-            return render(request, 'staff/staff.html', content)
-        if num == 2:
-            order = OrderDrive.objects.filter(dealer=user.belong_to.distributor_name, staff_id=user.user_id, confirm=None)
-            add = {
-                'name': '待处理订单',
-                'orders': order
-            }
-            content = dict(user_agent, **add)
-            return render(request, 'staff/deal.html', content)
-        if num == 3:
-            order = OrderDrive.objects.filter(dealer=user.belong_to.distributor_name, staff_id=user.user_id, confirm=1)
-            add = {
-                'name': '已处理订单',
-                'orders': order
-            }
-            content = dict(user_agent, **add)
-            return render(request, 'staff/dealed.html', content)
-        if num == 4:
-            car_type = CarInfo.objects.all()
-            add = {
-                'name': '客户购买填写基本信息',
-                'car_type': car_type,
-            }
-            content = dict(user_agent, **add)
-            return render(request, 'staff/sale_car.html', content)
-        if num == 5:
-            sale_history = BuyCar.objects.filter(staff_id=user)
-            add = {
-                'name': '销售记录',
-                'orders': sale_history,
-            }
-            content = dict(user_agent, **add)
-            return render(request, 'staff/sale_history.html', content)
+            if num == None:
+                order = OrderDrive.objects.filter(dealer=user.belong_to.distributor_name, staff_id=None)
+                add = {
+                    'name': '所有订单',
+                    'orders': order
+                }
+                content = dict(user_agent, **add)
+                return render(request, 'staff/staff.html', content)
+            if num == 2:
+                order = OrderDrive.objects.filter(dealer=user.belong_to.distributor_name, staff_id=user.user_id, confirm=None)
+                add = {
+                    'name': '待处理订单',
+                    'orders': order
+                }
+                content = dict(user_agent, **add)
+                return render(request, 'staff/deal.html', content)
+            if num == 3:
+                order = OrderDrive.objects.filter(dealer=user.belong_to.distributor_name, staff_id=user.user_id, confirm=1)
+                add = {
+                    'name': '已处理订单',
+                    'orders': order
+                }
+                content = dict(user_agent, **add)
+                return render(request, 'staff/dealed.html', content)
+            if num == 4:
+                car_type = CarInfo.objects.all()
+                add = {
+                    'name': '客户购买填写基本信息',
+                    'car_type': car_type,
+                }
+                content = dict(user_agent, **add)
+                return render(request, 'staff/sale_car.html', content)
+            if num == 5:
+                sale_history = BuyCar.objects.filter(staff_id=user)
+                add = {
+                    'name': '销售记录',
+                    'orders': sale_history,
+                }
+                content = dict(user_agent, **add)
+                return render(request, 'staff/sale_history.html', content)
+        else:
+            return redirect('/backstage/login/')
     except:
         return redirect('/backstage/login/')
 
@@ -694,31 +697,34 @@ def online_buy(request):
     try:
         account = request.session['account']
         user = User.objects.get(account=account)
-        if request.method == 'POST':
-            bf = BuyForm(request.POST)
-            if bf.is_valid():
-                name = bf.cleaned_data['name']
-                telephone = bf.cleaned_data['telephone']
-                address = bf.cleaned_data['address']
-                month_salary = bf.cleaned_data['month_salary']
-                id_card = bf.cleaned_data['id_card']
-                bank_card = bf.cleaned_data['bank_card']
-                first_pay = bf.cleaned_data['first_pay']
-                month_pay = bf.cleaned_data['month_pay']
-                sex = request.POST['sex']
-                car_id = request.POST['car_type']
-                car_info = CarInfo.objects.get(car_id=car_id)
-                car_name = car_info.car_name
-                BuyCar.objects.create(user_name=name, car_name=car_name, sex=sex,
-                                      telephone=telephone, dealer=address, month_pay=month_pay,
-                                      month_salary=month_salary, id_card=id_card,
-                                      bank_card=bank_card, staff_id=user, first_pay=first_pay)
-                inventory = InventoryManagement.objects.get(car_info=car_info)
-                inventory.num -= 1
-                inventory.save()
-                url = resolve_url(staff, 4)
-                return render(request, 'user/skip.html', {'message': '提交购买订单成功', 'url': url})
-            return render(request, 'staff/sale_car.html', {'message': '输入错误，请重新输入！！'})
+        if user.user_type.user_type == 1:
+            if request.method == 'POST':
+                bf = BuyForm(request.POST)
+                if bf.is_valid():
+                    name = bf.cleaned_data['name']
+                    telephone = bf.cleaned_data['telephone']
+                    address = bf.cleaned_data['address']
+                    month_salary = bf.cleaned_data['month_salary']
+                    id_card = bf.cleaned_data['id_card']
+                    bank_card = bf.cleaned_data['bank_card']
+                    first_pay = bf.cleaned_data['first_pay']
+                    month_pay = bf.cleaned_data['month_pay']
+                    sex = request.POST['sex']
+                    car_id = request.POST['car_type']
+                    car_info = CarInfo.objects.get(car_id=car_id)
+                    car_name = car_info.car_name
+                    BuyCar.objects.create(user_name=name, car_name=car_name, sex=sex,
+                                          telephone=telephone, dealer=address, month_pay=month_pay,
+                                          month_salary=month_salary, id_card=id_card,
+                                          bank_card=bank_card, staff_id=user, first_pay=first_pay)
+                    inventory = InventoryManagement.objects.get(car_info=car_info)
+                    inventory.num -= 1
+                    inventory.save()
+                    url = resolve_url(staff, 4)
+                    return render(request, 'user/skip.html', {'message': '提交购买订单成功', 'url': url})
+                return render(request, 'staff/sale_car.html', {'message': '输入错误，请重新输入！！'})
+        else:
+            return redirect('/backstage/login/')
     except:
         return redirect('/backstage/login/')
 
@@ -729,82 +735,85 @@ def dealer_admin(request, num=None):
     try:
         account = request.session['account']
         user = User.objects.get(account=account)
-        user_agent = {'user': user}
-        if num == None:
-            if request.method == 'POST':
-                name = request.POST.get('name')
-                staff1 = User.objects.filter(user_name__exact=name)
-                staff2 = User.objects.filter(account__exact=name)
-                if staff1:
-                    staff = staff1
+        if user.user_type.user_type == 2:
+            user_agent = {'user': user}
+            if num == None:
+                if request.method == 'POST':
+                    name = request.POST.get('name')
+                    staff1 = User.objects.filter(user_name__exact=name)
+                    staff2 = User.objects.filter(account__exact=name)
+                    if staff1:
+                        staff = staff1
+                    else:
+                        staff = staff2
+                    add = {
+                        'name': '员工管理',
+                        'staff': staff
+                    }
+                    content = dict(user_agent, **add)
+                    return render(request, 'dealer/dealer_admin.html', content)
                 else:
-                    staff = staff2
+                    staff = User.objects.filter(belong_to=user.belong_to, user_type_id=1)
+                    add = {
+                        'name': '员工管理',
+                        'staff': staff
+                    }
+                    content = dict(user_agent, **add)
+                    return render(request, 'dealer/dealer_admin.html', content)
+            if num == 2:
+                inventory = InventoryManagement.objects.filter(distributor=user.belong_to)
                 add = {
-                    'name': '员工管理',
-                    'staff': staff
+                    'name': '车辆库存管理',
+                    'inventory': inventory
                 }
                 content = dict(user_agent, **add)
-                return render(request, 'dealer/dealer_admin.html', content)
-            else:
-                staff = User.objects.filter(belong_to=user.belong_to, user_type_id=1)
-                add = {
-                    'name': '员工管理',
-                    'staff': staff
-                }
-                content = dict(user_agent, **add)
-                return render(request, 'dealer/dealer_admin.html', content)
-        if num == 2:
-            inventory = InventoryManagement.objects.filter(distributor=user.belong_to)
-            add = {
-                'name': '车辆库存管理',
-                'inventory': inventory
-            }
-            content = dict(user_agent, **add)
-            return render(request, 'dealer/inventory.html', content)
-        if num == 3:
-            if request.method == 'POST':
-                name = request.POST.get('name')
-                try:
-                    staff_id = User.objects.get(account=name)
-                    order = OrderDrive.objects.filter(dealer=user.belong_to.distributor_name, staff_id=staff_id, confirm=1)
-                except:
-                    order = OrderDrive.objects.filter(user_name=name, confirm=1)
-                add = {
-                    'name': '查询预约记录',
-                    'orders': order
-                }
-                content = dict(user_agent, **add)
-                return render(request, 'dealer/order.html', content)
-            else:
-                order = OrderDrive.objects.filter(dealer=user.belong_to.distributor_name, confirm=1)
-                add = {
-                    'name': '查询预约记录',
-                    'orders': order
-                }
-                content = dict(user_agent, **add)
-                return render(request, 'dealer/order.html', content)
-        if num == 4:
-            if request.method == 'POST':
-                name = request.POST.get('name')
-                try:
-                    staff_id = User.objects.get(account=name)
-                    buy = BuyCar.objects.filter(dealer=user.belong_to.distributor_name, staff_id=staff_id)
-                except:
-                    buy = BuyCar.objects.filter(user_name=name)
-                add = {
-                    'name': '查询预约记录',
-                    'buys': buy
-                }
-                content = dict(user_agent, **add)
-                return render(request, 'dealer/buy.html', content)
-            else:
-                buy = BuyCar.objects.filter(dealer=user.belong_to.distributor_name)
-                add = {
-                    'name': '查询购买记录',
-                    'buys': buy
-                }
-                content = dict(user_agent, **add)
-                return render(request, 'dealer/buy.html', content)
+                return render(request, 'dealer/inventory.html', content)
+            if num == 3:
+                if request.method == 'POST':
+                    name = request.POST.get('name')
+                    try:
+                        staff_id = User.objects.get(account=name)
+                        order = OrderDrive.objects.filter(dealer=user.belong_to.distributor_name, staff_id=staff_id, confirm=1)
+                    except:
+                        order = OrderDrive.objects.filter(user_name=name, confirm=1)
+                    add = {
+                        'name': '查询预约记录',
+                        'orders': order
+                    }
+                    content = dict(user_agent, **add)
+                    return render(request, 'dealer/order.html', content)
+                else:
+                    order = OrderDrive.objects.filter(dealer=user.belong_to.distributor_name, confirm=1)
+                    add = {
+                        'name': '查询预约记录',
+                        'orders': order
+                    }
+                    content = dict(user_agent, **add)
+                    return render(request, 'dealer/order.html', content)
+            if num == 4:
+                if request.method == 'POST':
+                    name = request.POST.get('name')
+                    try:
+                        staff_id = User.objects.get(account=name)
+                        buy = BuyCar.objects.filter(dealer=user.belong_to.distributor_name, staff_id=staff_id)
+                    except:
+                        buy = BuyCar.objects.filter(user_name=name)
+                    add = {
+                        'name': '查询预约记录',
+                        'buys': buy
+                    }
+                    content = dict(user_agent, **add)
+                    return render(request, 'dealer/buy.html', content)
+                else:
+                    buy = BuyCar.objects.filter(dealer=user.belong_to.distributor_name)
+                    add = {
+                        'name': '查询购买记录',
+                        'buys': buy
+                    }
+                    content = dict(user_agent, **add)
+                    return render(request, 'dealer/buy.html', content)
+        else:
+            return redirect('/backstage/login/')
     except:
         return redirect('/backstage/login/')
 
@@ -856,27 +865,30 @@ def update(request, account_id):
     try:
         account = request.session['account']
         user = User.objects.get(account=account)
-        user_agent = {
-            'user': user,
-            'name': '修改信息',
-            'display': 1
-        }
-        staff = User.objects.get(account=account_id)
-        if request.method == 'POST':
-            staff.user_name = request.POST.get('name')
-            staff.sex = request.POST.get('sex')
-            staff.address = request.POST.get('address')
-            staff.email = request.POST.get('email')
-            staff.telephone = request.POST.get('tel')
-            staff.save()
-            url = resolve_url(dealer_admin)
-            return render(request, 'user/skip.html', {'message': '修改完成', 'url': url})
-        else:
-            add = {
-                'staff': staff
+        if user.user_type.user_type == 2:
+            user_agent = {
+                'user': user,
+                'name': '修改信息',
+                'display': 1
             }
-            content = dict(user_agent, **add)
-            return render(request, 'dealer/add.html', content)
+            staff = User.objects.get(account=account_id)
+            if request.method == 'POST':
+                staff.user_name = request.POST.get('name')
+                staff.sex = request.POST.get('sex')
+                staff.address = request.POST.get('address')
+                staff.email = request.POST.get('email')
+                staff.telephone = request.POST.get('tel')
+                staff.save()
+                url = resolve_url(dealer_admin)
+                return render(request, 'user/skip.html', {'message': '修改完成', 'url': url})
+            else:
+                add = {
+                    'staff': staff
+                }
+                content = dict(user_agent, **add)
+                return render(request, 'dealer/add.html', content)
+        else:
+            return redirect('/backstage/login/')
     except:
         return redirect('/backstage/login/')
 
